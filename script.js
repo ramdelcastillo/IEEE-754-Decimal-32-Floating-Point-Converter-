@@ -1,7 +1,10 @@
 document.getElementById('convert-button').addEventListener('click', function() {
     const decimalNumber = parseFloat(document.getElementById('decimal-number').value);
-    let integerPart = Math.floor(decimalNumber); 
-    let stringNumber = integerPart.toString();
+    const exponent = parseInt(document.getElementById('exponent').value);
+    const decimalString = decimalNumber.toString();
+    const exponentString = exponent.toString();
+    // let integerPart = Math.floor(decimalNumber); 
+    // let stringNumber = integerPart.toString();
 
     const normalizedDecimal = document.getElementById('normalized-decimal');
     const finalExponent = document.getElementById('final-exponent');
@@ -20,10 +23,25 @@ document.getElementById('convert-button').addEventListener('click', function() {
 
 
     decimalError.textContent = '';
-    if(isNaN(decimalNumber)) {
-        combinationBits.textContent = 'true';
-        exponentBits.textContent = 'NaN';
+    exponentError.textContent = '';
+    normalizedDecimal.textContent = '--';
+    finalExponent.textContent = '--';
+    ePrime.textContent = '--';
+    signBit.textContent = '--';
+    combinationBits.textContent = '--';
+    exponentBits.textContent = '--';
+    dpd.textContent = '--';
+    finalAnswerBinary.textContent = '--';
+    finalAnswerHex.textContent = '--';
+
+    const checkDecimalNumberError = decimalString.length == 0 || (decimalString.length == 1)
+   
+    if(isNaN(decimalNumber) && isNaN(exponent)) {
         decimalError.textContent = 'Error! Please enter a decimal value.';
+        exponentError.textContent = 'Error! Please enter a decimal value.';
+    } if (isNaN(decimalNumber)) {
+        decimalError.textContent = 'Error! Please enter a decimal value.';
+    } else if (isNaN(exponent)) {
         exponentError.textContent = 'Error! Please enter a decimal value.';
     } else {
   
@@ -33,11 +51,22 @@ document.getElementById('convert-button').addEventListener('click', function() {
             signBit.textContent = '1';
         }
 
-    // let values = [0.1234567, -12345.5678, 0.000012345, 123.456];
-
-        let result = normalizeTo7WholeDigits(decimalNumber);
-        // Normalize integer part to 7 digits
-        normalizedDecimal.textContent = normalizeWithMode(result.normalizedValue, 'round-down');
+        if(decimalString.length < 8 && !decimalString.includes('.')) {
+            let result = normalizeWithMode(decimalNumber, 'truncate');
+            normalizedDecimal.textContent = result;
+            finalExponent.textContent = exponent;
+            combinationBits.textContent = decimalString;
+            exponentBits.textContent = decimalString.length;
+        } else if(decimalString.length > 7 && !decimalString.includes('.')) {
+            let result2 = normalizeToWholeDigits(decimalNumber)
+            normalizedDecimal.textContent = result2.normalizedValue;
+            finalExponent.textContent = result2.decimalPlacesMoved;
+            combinationBits.textContent = decimalString;
+            exponentBits.textContent = decimalString.length;
+        } else {
+            let result3 = normalizeTo7WholeDigits(decimalNumber);
+            normalizedDecimal.textContent = normalizeWithMode(result3.normalizedValue, 'truncate');
+        }
     }
 });
 
@@ -64,6 +93,23 @@ function normalizeTo7WholeDigits(value) {
         decimalPlacesMoved: decimalPlacesMoved
     };
 }
+
+function normalizeToWholeDigits(value) {
+    
+    let wholeDigits = Math.floor(Math.log10(Math.abs(value))) + 1;
+  
+
+    let decimalPlacesMoved = 7 - wholeDigits;
+    let multiplier = Math.pow(10, decimalPlacesMoved);
+  
+  
+    let normalizedValue = value * multiplier;
+  
+    return {
+      normalizedValue: normalizedValue,
+      decimalPlacesMoved: decimalPlacesMoved
+    };
+  }
 
 function normalizeWithMode(value, mode) {
     let isNegative = value < 0;
