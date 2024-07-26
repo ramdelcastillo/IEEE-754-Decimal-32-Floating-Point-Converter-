@@ -37,7 +37,7 @@ document.getElementById('convert-button').addEventListener('click', function() {
 
         let result = normalizeTo7WholeDigits(decimalNumber);
         // Normalize integer part to 7 digits
-        normalizedDecimal.textContent = normalizeWithMode(result.normalizedValue, 'truncate');
+        normalizedDecimal.textContent = normalizeWithMode(result.normalizedValue, 'round-down');
     }
 });
 
