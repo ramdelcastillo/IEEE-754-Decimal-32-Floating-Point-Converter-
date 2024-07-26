@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal to Binary and DPD Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="number"] {
+            width: 300px;
+            padding: 5px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Decimal to Binary and DPD Converter</h1>
+        <input type="number" id="decimalInput" placeholder="Enter decimal number" />
+        <button onclick="convertToBinaryAndDPD()">Convert</button>
+        <div class="result" id="binaryResult"></div>
+        <div class="result" id="dpdResult"></div>
+    </div>
+
+    <script>
+        function convertToBinaryAndDPD() {
+            const decimalInput = document.getElementById('decimalInput').value;
+            const binaryResult = document.getElementById('binaryResult');
+            const dpdResult = document.getElementById('dpdResult');
+            
+            if (decimalInput === '' || isNaN(decimalInput)) {
+                binaryResult.textContent = 'Please enter a valid decimal number.';
+                dpdResult.textContent = '';
+                return;
+            }
+            
+            const packedBinary = convertToPackedBinary(decimalInput);
+            const dpdNumber = convertPackedBinaryToDPD(packedBinary);
+            
+            binaryResult.textContent = `Packed Binary: ${packedBinary}`;
+            dpdResult.textContent = `DPD: ${dpdNumber}`;
+        }
+
+        function convertToPackedBinary(decimal) {
+            // Ensure the decimal number is an integer
+            decimal = parseInt(decimal, 10);
+            let binaryString = '';
+            while (decimal > 0) {
+                let binaryDigit = (decimal % 10).toString(2).padStart(4, '0');
+                binaryString = binaryDigit + binaryString;
+                decimal = Math.floor(decimal / 10);
+            }
+            return binaryString;
+        }
+
+        function convertPackedBinaryToDPD(binary) {
+            let dpd = '';
+            // Pad the binary string to ensure it is a multiple of 12 bits
+            while (binary.length % 12 !== 0) {
+                binary = '0' + binary;
+            }
+            for (let i = 0; i < binary.length; i += 12) {
+                let chunk = binary.slice(i, i + 12);
+                let dpdChunk = convertChunkToDPD(chunk);
+                dpd += dpdChunk;
+            }
+            return dpd;
+        }
+
+        function convertChunkToDPD(chunk) {
+            // Extract each bit for the DPD conversion
+            const a = chunk[0];
+            const b = chunk[1];
+            const c = chunk[2];
+            const d = chunk[3];
+            const e = chunk[4];
+            const f = chunk[5];
+            const g = chunk[6];
+            const h = chunk[7];
+            const i = chunk[8];
+            const j = chunk[9];
+            const k = chunk[10];
+            const m = chunk[11];
+
+            let pqr, stu, v, wxy;
+
+            // Conversion logic based on the provided table
+            if (a === '0' && e === '0' && i === '0') {
+                pqr = `${b}${c}${d}`;
+                stu = `${f}${g}${h}`;
+                v = '0';
+                wxy = `${j}${k}${m}`;
+            } else if (a === '0' && e === '0' && i === '1') {
+                pqr = `${b}${c}${d}`;
+                stu = `${f}${g}${h}`;
+                v = '1';
+                wxy =`00${m}`;
+            } else if (a === '0' && e === '1' && i === '0') {
+                pqr = `${b}${c}${d}`;
+                stu = `${j}${k}${h}`;
+                v = '1';
+                wxy = `01${m}`;
+            } else if (a === '0' && e === '1' && i === '1') {
+                pqr = `${b}${c}${d}`;
+                stu = `10${h}`;
+                v = '1';
+                wxy = `11${m}`;
+            } else if (a === '1' && e === '0' && i === '0') {
+                pqr = `${j}${k}${d}`;
+                stu = `${f}${g}${h}`;
+                v = '1';
+                wxy = `10${m}`;
+            } else if (a === '1' && e === '0' && i === '1') {
+                pqr = `${f}${g}${d}`;
+                stu = `01${h}`;
+                v = '1';
+                wxy = `11${m}`;
+            } else if (a === '1' && e === '1' && i === '0') {
+                pqr = `${j}${k}${d}`;
+                stu = `00${h}`;
+                v = '1';
+                wxy = `11${m}`;
+            } else if (a === '1' && e === '1' && i === '1') {
+                pqr = `00${d}`;
+                stu = `11${h}`;
+                v = '1';
+                wxy = `11${m}`;
+            }
+
+            return pqr + stu + v + wxy;
+        }
+    </script>
+</body>
+</html>
