@@ -34,7 +34,17 @@ document.getElementById('convert-button').addEventListener('click', function() {
     finalAnswerBinary.textContent = '--';
     finalAnswerHex.textContent = '--';
 
-    const checkDecimalNumberError = decimalString.length == 0 || (decimalString.length == 1)
+    // const checkDecimalNumberError = decimalString.length == 0 || (decimalString.length == 1)
+
+    const selectElement = document.getElementById('input-type');
+
+    var selectedValue = selectElement.value;
+
+    finalAnswerHex.textContent = selectedValue
+
+    selectElement.disabled = true;
+
+
    
     if(isNaN(decimalNumber) && isNaN(exponent)) {
         decimalError.textContent = 'Error! Please enter a decimal value.';
@@ -57,15 +67,39 @@ document.getElementById('convert-button').addEventListener('click', function() {
             finalExponent.textContent = exponent;
             combinationBits.textContent = decimalString;
             exponentBits.textContent = decimalString.length;
+            ePrime.textContent = exponent + 101;
         } else if(decimalString.length > 7 && !decimalString.includes('.')) {
-            let result2 = normalizeToWholeDigits(decimalNumber)
-            normalizedDecimal.textContent = result2.normalizedValue;
-            finalExponent.textContent = result2.decimalPlacesMoved;
+            selectElement.disabled = false;
+            let result2 = normalizeTo7WholeDigits(decimalNumber)
+            var value1 = normalizeWithMode(result2.normalizedValue, selectedValue);
+            normalizedDecimal.textContent = value1;
+            finalExponent.textContent = exponent - result2.decimalPlacesMoved;
             combinationBits.textContent = decimalString;
             exponentBits.textContent = decimalString.length;
-        } else {
+            ePrime.textContent = exponent - result2.decimalPlacesMoved + 101;
+        } else if (decimalString.length > 8 && decimalString.includes('.')) {
+            selectElement.disabled = false;
             let result3 = normalizeTo7WholeDigits(decimalNumber);
-            normalizedDecimal.textContent = normalizeWithMode(result3.normalizedValue, 'truncate');
+            finalAnswerBinary.textContent = result3.normalizedValue;
+            var value2 = result3.normalizedValue;
+            var value3 = normalizeWithMode(value2, selectedValue);
+       
+            normalizedDecimal.textContent = value3;
+            finalExponent.textContent = exponent - result3.decimalPlacesMoved;
+            ePrime.textContent = exponent - result3.decimalPlacesMoved + 101;
+        } else {
+            selectElement.disabled = true;
+            let result3 = normalizeTo7WholeDigits(decimalNumber);
+            if (hasTrailingZeros(normalizeWithMode(result3.normalizedValue, 'truncate'))) {
+                let result4 = shiftToLeft(normalizeWithMode(result3.normalizedValue, 'truncate'));
+                normalizedDecimal.textContent = result4.shiftedValue;
+                finalExponent.textContent = exponent - result3.decimalPlacesMoved + result4.trailingZeros
+                ePrime.textContent = exponent - result3.decimalPlacesMoved + result4.trailingZeros + 101;
+            } else {
+                normalizedDecimal.textContent = normalizeWithMode(result3.normalizedValue, 'truncate');
+                finalExponent.textContent = exponent - result3.decimalPlacesMoved;
+                ePrime.textContent = exponent - result3.decimalPlacesMoved + 101;
+            }
         }
     }
 });
@@ -111,61 +145,49 @@ function normalizeToWholeDigits(value) {
     };
   }
 
-function normalizeWithMode(value, mode) {
+  function normalizeWithMode(value, mode) {
     let isNegative = value < 0;
-    
     let strValue = Math.abs(value).toString();
     
     if (strValue.length > 7) {
         if (mode === 'truncate') {
             strValue = strValue.slice(0, 7);
-        } else if (mode === 'round') {
-            let base = Number(strValue.slice(0, 7)); 
-            let extraDigits = strValue.slice(7); 
-            if (extraDigits.length > 0) {
+        } else if (mode === 'roundup') {
+            let base = Number(strValue.slice(0, 7));
+            if(!isNegative) {
                 base += 1;
+                strValue = base.toString().padStart(7, '0').slice(0, 7);
+            } else {
+                strValue = strValue.slice(0, 7);
             }
-            
-            strValue = base.toString().padStart(7, '0').slice(0, 7);
         } else if (mode === 'round-down') {
+            let base = Number(strValue.slice(0, 7));
+            if(isNegative) {
+                base += 1;
+                strValue = base.toString().padStart(7, '0').slice(0, 7);
+                console.log(strValue)
+            } else {
+                strValue = strValue.slice(0, 7);
+            }
 
-            strValue = strValue.slice(0, 7);
         } else if (mode === 'round-even') {
-       
-            let base = Number(strValue.slice(0, 7)); 
-            let extraDigits = strValue.slice(7); 
-
-    
+            let base = Number(strValue.slice(0, 7));
+            let extraDigits = strValue.slice(7);
             if (extraDigits.length > 0) {
                 let lastDigit = base % 10;
                 let roundingFactor = Number(extraDigits[0]) >= 5 ? 1 : 0;
-
-       
                 base += roundingFactor;
-
-  
                 if (lastDigit === 9 && roundingFactor === 1) {
                     base += 1;
                 }
             }
-
             strValue = base.toString().padStart(7, '0').slice(0, 7);
         }
-        
 
         if (isNegative) {
-          
-            if (mode === 'round') {
-                strValue = (Number(strValue) - 1).toString().padStart(7, '0');
-            } else if (mode === 'round-down') {
-                strValue = (Number(strValue) + 1).toString().padStart(7, '0');
-            } else if (mode === 'round-even') {
-                
-            }
             strValue = '-' + strValue;
         }
     } else {
-     
         strValue = strValue.padStart(7, '0');
         if (isNegative) {
             strValue = '-' + strValue;
@@ -173,4 +195,30 @@ function normalizeWithMode(value, mode) {
     }
     
     return strValue;
+}
+
+function shiftToLeft(value) {
+
+    let strValue = value.toString();
+
+    strValue = strValue.replace(/0+$/, '');
+
+    let trailingZeros = value.toString().length - strValue.length;
+
+    strValue = strValue.padStart(7, '0');
+
+    return {
+        shiftedValue: strValue,
+        trailingZeros: trailingZeros
+    };
+}
+
+function hasTrailingZeros(value) {
+    let strValue = value.toString();
+
+    if (strValue.length === 7 && strValue.endsWith('0')) {
+        return true;
+    } else {
+        return false;
+    }
 }
