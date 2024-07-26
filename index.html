@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decimal to DPD Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IEEE-754 Decimal-32 Floating-Point Converter</h1>
+        </header>
+        <main>
+            <section class="input-section">
+                    <h2>INPUT
+                        <div class="input-select">
+                            <select id="input-type">
+                                <option value="decimal">Decimal</option>
+                                <option value="nan">NaN</option>
+                            </select>
+                        </div>  TRUNCATE METHOD
+                        <div class="input-select">
+                            <select id="input-type">
+                                <option value="decimal">1</option>
+                                <option value="nan">2</option>
+                            </select>
+                        </div>
+                    </h2>  
+                    
+                    <div class="input-group">
+                        <label for="decimal-number">Enter Decimal Number  <span id="decimal-error" style="color: red; margin-left: 33px;"></span></label>
+                        <input type="text" id="decimal-number" name="decimal-number" placeholder="Enter decimal number...">
+                        <!-- <span id="decimal-error" style="color: red;"></span> -->
+                    </div>
+                    <!-- <div class="input-group">
+                        <span id="decimal-error" style="color: red;"></span>
+                    </div> -->
+                    <div class="input-group">
+                        <label for="exponent">Enter Exponent (Base-10)  <span id="exponent-error" style="color: red; margin-left: 10px;"></span></label>
+                        <input type="text" id="exponent" name="exponent" placeholder="Enter exponent here...">
+                    </div>
+
+                <div class="button-group">
+                    <button id="convert-button">Convert</button>
+                </div>
+            </section>
+            <section class="results-section">
+                <div class="processing-section">
+                    <h2>Processing</h2>
+                    <div class="output-group">
+                        <label for="normalized-decimal">Normalized Decimal</label>
+                        <div id="normalized-decimal" class="output-box">--</div>
+                    </div>
+                    <div class="output-group">
+                        <label for="final-exponent">Final Exponent</label>
+                        <div id="final-exponent" class="output-box">--</div>
+                    </div>
+                    <div class="output-group">
+                        <label for="e-prime">E-Prime</label>
+                        <div id="e-prime" class="output-box">--</div>
+                    </div>
+                </div>
+                <div class="output-section">
+                    <h2>Output</h2>
+                    <div class="output-group">
+                        <label for="sign-bit">Sign Bit</label>
+                        <div id="sign-bit" class="output-box">--</div>
+                    </div>
+                    <div class="output-group">
+                        <label for="combination-bits">Combination Bits</label>
+                        <div id="combination-bits" class="output-box">--</div>
+                    </div>
+                    <div class="output-group">
+                        <label for="exponent-bits">Exponent Bits</label>
+                        <div id="exponent-bits" class="output-box">--</div>
+                    </div>
+                    <div class="output-group">
+                        <label for="dpd">Densely Packed BCD</label>
+                        <div id="dpd" class="output-box">--</div>
+                    </div>
+                    <div class="output-group">
+                        <label for="final-answer-binary">Final Answer (Binary)</label>
+                        <div id="final-answer-binary" class="output-box">--</div>
+                    </div>
+                    <div class="output-group">
+                        <label for="final-answer-hex">Final Answer (Hex)</label>
+                        <div id="final-answer-hex" class="output-box">--</div>
+                    </div>
+                    <div class="button-group right-align">
+                        <button id="export-button">Export</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="subject">
+                CSARCH2 PROJECT
+            <p class="mem">
+                <ul class="custom-list">
+                    <li>Arca, Althea</li>
+                    <li>Lim, Alyanna</li>
+                    <li>Del Castillo, Jose Mari</li>
+                    <li>Fulo, Rulet</li>
+                </ul>
+            </p>
+                
+                    
+                </div>
+                  
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
