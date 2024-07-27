@@ -229,23 +229,6 @@ function normalizeTo7WholeDigits(value) {
     };
 }
 
-function normalizeToWholeDigits(value) {
-    
-    let wholeDigits = Math.floor(Math.log10(Math.abs(value))) + 1;
-  
-
-    let decimalPlacesMoved = 7 - wholeDigits;
-    let multiplier = Math.pow(10, decimalPlacesMoved);
-  
-  
-    let normalizedValue = value * multiplier;
-  
-    return {
-      normalizedValue: normalizedValue,
-      decimalPlacesMoved: decimalPlacesMoved
-    };
-  }
-
   function normalizeWithMode(value, mode) {
     let isNegative = value < 0;
     let strValue = Math.abs(value).toString();
@@ -253,7 +236,7 @@ function normalizeToWholeDigits(value) {
     if (strValue.length > 7) {
         if (mode === 'truncate') {
             strValue = strValue.slice(0, 7);
-        } else if (mode === 'roundup') {
+        } else if (mode === 'round-up') {
             let base = Number(strValue.slice(0, 7));
             if(!isNegative) {
                 base += 1;
@@ -272,17 +255,45 @@ function normalizeToWholeDigits(value) {
             }
 
         } else if (mode === 'round-even') {
-            let base = Number(strValue.slice(0, 7));
-            let extraDigits = strValue.slice(7);
-            if (extraDigits.length > 0) {
-                let lastDigit = base % 10;
-                let roundingFactor = Number(extraDigits[0]) >= 5 ? 1 : 0;
-                base += roundingFactor;
-                if (lastDigit === 9 && roundingFactor === 1) {
-                    base += 1;
+            let originalBase = Number(strValue.slice(0, 7));
+            let seventh = Number(strValue.slice(6, 7));
+            let base = Number(strValue);
+            let parts = base.toString().split('.');
+
+            let decimalPart = parts[1] ? `.${parts[1]}` : '0'; 
+            let base2 = Number(decimalPart);
+
+            let is7thEven = seventh % 2 === 0;
+         
+            if(!isNegative) { 
+                if(base2 > 0.5) {
+                    originalBase += 1;
+                    strValue = originalBase.toString().padStart(7, '0').slice(0, 7);
+                } else if (base2 < 0.5) {
+                    strValue = strValue.slice(0, 7);
+                } else {
+                    if(is7thEven) {
+                        strValue = strValue.slice(0, 7);
+                    } else {
+                        originalBase += 1;
+                        strValue = originalBase.toString().padStart(7, '0').slice(0, 7);
+                    }
                 }
-            }
-            strValue = base.toString().padStart(7, '0').slice(0, 7);
+            } else {
+                if(base2 > 0.5) {
+                    originalBase += 1;
+                    strValue = originalBase.toString().padStart(7, '0').slice(0, 7);
+                } else if (base2 < 0.5) {
+                    strValue = strValue.slice(0, 7);
+                } else {
+                    if(is7thEven) {
+                        strValue = strValue.slice(0, 7);
+                    } else {
+                        originalBase += 1;
+                        strValue = originalBase.toString().padStart(7, '0').slice(0, 7);
+                    }
+                }
+            }   
         }
 
         if (isNegative) {
