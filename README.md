@@ -59,17 +59,6 @@ Make sure to install the following before running the file:
 
 12. Input the local address in the web browser. The application should load.<br>
  ![name](githublink)
-
-## Enjoy and communicate with cybersecurity enthusiasts all over the world!
-
-* Create an account by clicking sign up on the upper right part of the application!
-    ![name](githublink)
-  
-* Fill out the form to create a user.
-    ![name](githublink)
-    
-* Log in to your account to maximize your cybersecurity forum experience! Log-in button is located on the upper right corner of the program.
-    ![name](githublink)
     
 
 Below are some of the screenshots of the application<br>
