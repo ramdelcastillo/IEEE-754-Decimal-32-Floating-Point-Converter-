@@ -1,64 +1,52 @@
 <!-- ABOUT THE PROJECT -->
 ## CSARCH2-Simulation-Project---IEEE-754-Decimal-32-Floating-Point-Converter
 
-![aboutus](https://github.com/ramdelcastillo/CCAPDEV-Phase-3/assets/91410042/20c7d780-b25c-4287-9929-1a53b5178770)<br>
-![image](https://github.com/ramdelcastillo/CCAPDEV-Phase-3/assets/91410042/2768588c-e55f-4f3a-844d-a9e199058bac)
+The **IEEE-754-Decimal-32-Floating-Point-Converter** is a website designed to convert any decimal to a Decimal 32 floating point. This will also show different processes before coming up with a final answer. Below are some sample inputs from the website.
 
-The **IEEE-754-Decimal-32-Floating-Point-Converter** is a website designed to convert any decimal to a Decimal 32 floating point. This will also show different process before coming up to a final answer.
-
+## Developers
+*Arca, Althea Denisse
+*Del Castillo, Jose Mari
+*Fulo, Rulet
+*Lim, Alyanna
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-
-### Prerequisites
-Make sure to install the following before running the file:
-
+Input any decimal number and the exponent. If the decimal number input contains more than 7 digits, the user may have an option to truncate, round up, round down, and round to the nearest ties to even. To do this, after clicking the convert button, click on the dropdown menu beside the input and choose any options. Click the Convert button again to get the result.
 
 ### Input
 
-1. Input any decimal number and click convert
-2. 
-   ```sh
-  
-   ```
-3. Press the Enter key until the end of the utility application and type yes at the end <br>
-  ![name](githublink)
-  
-4. 
-
-   ```sh
+1. Input: 457<br>
+   Exponent: 2<br>
+   ![3digitdecimal](https://github.com/user-attachments/assets/9ac5b182-c851-44a9-adc8-c231c167cc4f)
    
-   ```
+2. Input:468.23<br>
+   Exponent: 4<br>
+   ![withdecimalpoint](https://github.com/user-attachments/assets/b68d929b-0bc1-4a34-a184-c88fc54d6367)
 
-    ![name](githublink)
+3. Input: 967587036 (Truncate)<br>
+   Exponent: 5<br>
+   ![9digittruncate](https://github.com/user-attachments/assets/9a5577fa-04fb-4813-9289-5004e8ee1a9e)
 
-5. Open the MongoDB Compass Application
-  ![name](githublink)
+4. INPUT:-102478597 (Round Down)<br>
+   EXPONENT: 4<br>
+   ![negativenumandrounddown](https://github.com/user-attachments/assets/31ce94ef-00ed-4271-b366-27f7ca608988)
+   
+6. INPUT: sqrt(255) (Round to Nearest Ties to Even)<br>
+   EXPONENT: 6<br>
+   ![sqrtwithroundtoNTE](https://github.com/user-attachments/assets/821be649-a6e0-4357-988c-79f8f4928497)
 
-6. Press Connect in the MongoDB Compass
-  ![name](githublink)
+7. INPUT: 5/45 (Round Up)<br>
+   EXPONENT: 3<br>
+   ![fractionwithroundup](https://github.com/user-attachments/assets/8d17abd3-8220-4216-827a-e0990a8d0a37)
+   
+8. INPUT: 749 + 5<br>
+   EXPONENT: 6<br>
+   ![addition](https://github.com/user-attachments/assets/68486705-790e-4c67-b051-0400085f7385)
 
-7. Input the command below to run the application
-    ```sh
-    
-    ```
-    ![name](githublink)
-    ![name](githublink)
+9. INPUT: 45 + r<br>
+   EXPONENT: 8<br>
+   ![specialcaseNaNwithletter](https://github.com/user-attachments/assets/77c572fa-b057-4665-a98a-385b72b3680c)
 
-8. In MongoDB, click the comments collection and click add data. Under Add data, click Import JSON or CSV file<br>
-  ![name](githublink)
-
-9. Navigate to the folder and find 'data' folder. Select the appropriate JSON file.<br>
-  ![name](githublink)
-
-10. Click Import.<br>
-  ![name](githublink)
-11. Repeat steps 8-10 to the remaining collections in the MongoDB<br>
-  ![name](githublink)
-
-12. Input the local address in the web browser. The application should load.<br>
- ![name](githublink)
     
 
 Below are some of the screenshots of the application<br>
