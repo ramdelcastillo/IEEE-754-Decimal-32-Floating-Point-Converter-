@@ -18,6 +18,8 @@ Input any decimal number and the exponent. If the decimal number input contains 
 1. Input: 457<br>
    Exponent: 2<br>
    ***
+   ___
+   --- 
    ![3digitdecimal](https://github.com/user-attachments/assets/9ac5b182-c851-44a9-adc8-c231c167cc4f)
    
 2. Input:468.23<br>
