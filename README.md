@@ -4,10 +4,10 @@
 The **IEEE-754-Decimal-32-Floating-Point-Converter** is a website designed to convert any decimal to a Decimal 32 floating point. This will also show different processes before coming up with a final answer. Below are some sample inputs from the website.
 
 ## Developers
-*Arca, Althea Denisse<br>
-*Del Castillo, Jose Mari<br>
-*Fulo, Rulet<br>
-*Lim, Alyanna<br>
+* Arca, Althea Denisse<br>
+* Del Castillo, Jose Mari<br>
+* Fulo, Rulet<br>
+* Lim, Alyanna<br>
 
 <!-- GETTING STARTED -->
 ## Getting Started
