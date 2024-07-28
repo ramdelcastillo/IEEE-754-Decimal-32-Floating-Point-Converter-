@@ -47,10 +47,3 @@ Input any decimal number and the exponent. If the decimal number input contains 
    EXPONENT: 8<br>
    ![specialcaseNaNwithletter](https://github.com/user-attachments/assets/77c572fa-b057-4665-a98a-385b72b3680c)
 
-    
-
-Below are some of the screenshots of the application<br>
- ![image](https://github.com/ramdelcastillo/CCAPDEV-Phase-3/assets/91410042/2768588c-e55f-4f3a-844d-a9e199058bac)
- ![userlog](https://github.com/ramdelcastillo/CCAPDEV-Phase-3/assets/91410042/ee282a8c-7261-42d7-97bf-fc77874645f9)
- ![viewgio](https://github.com/ramdelcastillo/CCAPDEV-Phase-3/assets/91410042/42a5439d-1550-44e6-bd0f-b8062a77c313)
- ![image](https://github.com/ramdelcastillo/CCAPDEV-Phase-3/assets/91410042/0dc7221c-f0b3-4e0f-a47a-fe8d8999bf64)
