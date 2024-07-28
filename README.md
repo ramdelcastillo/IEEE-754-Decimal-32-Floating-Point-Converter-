@@ -4,14 +4,14 @@
 The **IEEE-754-Decimal-32-Floating-Point-Converter** is a website designed to convert any decimal to a Decimal 32 floating point. This will also show different processes before coming up with a final answer. Below are some sample inputs from the website.
 
 ## Developers
-*Arca, Althea Denisse
-*Del Castillo, Jose Mari
-*Fulo, Rulet
-*Lim, Alyanna
+*Arca, Althea Denisse<br>
+*Del Castillo, Jose Mari<br>
+*Fulo, Rulet<br>
+*Lim, Alyanna<br>
 
 <!-- GETTING STARTED -->
 ## Getting Started
-Input any decimal number and the exponent. If the decimal number input contains more than 7 digits, the user may have an option to truncate, round up, round down, and round to the nearest ties to even. To do this, after clicking the convert button, click on the dropdown menu beside the input and choose any options. Click the Convert button again to get the result.
+Input any decimal number and the exponent. If the decimal number input contains more than 7 digits, the user may have the option to truncate, round up, round down, and round to the nearest ties to even. To do this, after clicking the convert button, click on the dropdown menu beside the input and choose any options. Click the Convert button again to get the result.
 
 ### Input
 
