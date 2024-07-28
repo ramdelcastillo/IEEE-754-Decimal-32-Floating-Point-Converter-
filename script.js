@@ -1,8 +1,5 @@
 document.getElementById('convert-button').addEventListener('click', function() {
-    const decimalNumber = parseFloat(document.getElementById('decimal-number').value);
     const exponent = parseInt(document.getElementById('exponent').value);
-    const decimalString = decimalNumber.toString();
-    const exponentString = exponent.toString();
     const normalizedDecimal = document.getElementById('normalized-decimal');
     const finalExponent = document.getElementById('final-exponent');
     const ePrime = document.getElementById('e-prime');
@@ -31,120 +28,440 @@ document.getElementById('convert-button').addEventListener('click', function() {
     var selectedValue = selectElement.value;
     selectElement.disabled = true;
 
-    if(isNaN(decimalNumber) && isNaN(exponent)) {
+    const exportBool = document.getElementById('export-button');
+    const dec = document.getElementById('decimal-number')
+    const expo = document.getElementById('exponent')
+
+    if (dec.value.trim() === '' && expo.value.trim() === '') {
         decimalError.textContent = 'Error! Please enter a decimal value.';
-        exponentError.textContent = 'Error! Please enter a decimal value.';
-    } if (isNaN(decimalNumber)) {
+        exponentError.textContent = 'Error! Please enter an exponent value.';
+         exportBool.disabled = true;
+    } else if (dec.value.trim() === '') {
         decimalError.textContent = 'Error! Please enter a decimal value.';
-    } else if (isNaN(exponent)) {
-        exponentError.textContent = 'Error! Please enter a decimal value.';
+        exportBool.disabled = true;
+    } else if (expo.value.trim() === '') {
+        exponentError.textContent = 'Error! Please enter an exponent value.';
+        exportBool.disabled = true;
     } else {
-  
-        if (decimalNumber >= 0) {
+        const input = document.getElementById('decimal-number').value;
+        var newDecimal = calculate(input);
+        var newDecimalString = newDecimal.toString();
+        console.log(newDecimal)
+        if (newDecimal >= 0) {
             signBit.textContent = '0';
         } else {
             signBit.textContent = '1';
         }
-
-        if(decimalString.length < 8 && !decimalString.includes('.')) {
-            let result = normalizeWithMode(decimalNumber, 'truncate');
-            normalizedDecimal.textContent = result; //HERE
+        
+        if(newDecimalString.length < 8 && !newDecimalString.includes('.')) {
+            let result = normalizeWithMode(newDecimal, 'truncate');
+            normalizedDecimal.textContent = result; 
             finalExponent.textContent = exponent;
-            exponentBits.textContent = decimalString.length;
-            var eP = exponent + 101;
-            var ePString = eP.toString() + " (" +  decimalTo8BitBinary(eP) + ")" ;
-            ePrime.textContent = ePString;
-            let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(result));
-            combinationBits.textContent = bits.combinationFieldBits;
-            exponentBits.textContent = bits.exponentBits;
-
-            let dpdDigits = extractDigits(result);
-            let dpd1 = convertToBinaryAndDPD(dpdDigits.firstSet);
-            let dpd2 = convertToBinaryAndDPD(dpdDigits.secondSet);
-            dpd.textContent = dpd1.dpdNumber + dpd2.dpdNumber;
-           
-            
-        } else if(decimalString.length > 7 && !decimalString.includes('.')) {
-            selectElement.disabled = false;
-            let result2 = normalizeTo7WholeDigits(decimalNumber)
-            var value1 = normalizeWithMode(result2.normalizedValue, selectedValue);
-            normalizedDecimal.textContent = value1; //HERE
-            finalExponent.textContent = exponent - result2.decimalPlacesMoved;
-            var eP = exponent - result2.decimalPlacesMoved + 101;
-            var ePString = eP.toString() + " (" +  decimalTo8BitBinary(eP) + ")" ;
-            ePrime.textContent = ePString;
-
-            let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(value1));
-            combinationBits.textContent = bits.combinationFieldBits;
-            exponentBits.textContent = bits.exponentBits;
-
-            let dpdDigits = extractDigits(value1);
-            let dpd1 = convertToBinaryAndDPD(dpdDigits.firstSet);
-            let dpd2 = convertToBinaryAndDPD(dpdDigits.secondSet);
-            dpd.textContent = dpd1.dpdNumber + dpd2.dpdNumber;
-           
-        } else if (decimalString.length > 8 && decimalString.includes('.')) {
-            selectElement.disabled = false;
-
-            if (decimalString.length == 9 && decimalString.includes('-')) {
-                selectElement.disabled = true;
-            }
-            let result3 = normalizeTo7WholeDigits(decimalNumber);
-            var value2 = result3.normalizedValue;
-            var value3 = normalizeWithMode(value2, selectedValue);
-            normalizedDecimal.textContent = value3; //HERE
-            finalExponent.textContent = exponent - result3.decimalPlacesMoved;
-
-            var eP = exponent - result3.decimalPlacesMoved + 101;
-            var ePString = eP.toString() + " (" +  decimalTo8BitBinary(eP) + ")" ;
-            ePrime.textContent = ePString;
-
-            let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(value3));
-            combinationBits.textContent = bits.combinationFieldBits;
-            exponentBits.textContent = bits.exponentBits;
-
-            let dpdDigits = extractDigits(value3);
-            let dpd1 = convertToBinaryAndDPD(dpdDigits.firstSet);
-            let dpd2 = convertToBinaryAndDPD(dpdDigits.secondSet);
-            dpd.textContent = dpd1.dpdNumber + dpd2.dpdNumber;
-        } else {
-            selectElement.disabled = true;
-            let result3 = normalizeTo7WholeDigits(decimalNumber);
-            if (hasTrailingZeros(normalizeWithMode(result3.normalizedValue, 'truncate'))) {
-                let result4 = shiftToLeft(normalizeWithMode(result3.normalizedValue, 'truncate'));
-                normalizedDecimal.textContent = result4.shiftedValue; //HERE
-                finalExponent.textContent = exponent - result3.decimalPlacesMoved + result4.trailingZeros
-               
-                var eP = exponent - result3.decimalPlacesMoved + result4.trailingZeros + 101;
+ 
+            if(parseInt(finalExponent.textContent) > 90) {
+                var exp1 = finalExponent.textContent + " (Special Case: Infinity)";
+                finalExponent.textContent = exp1;
+                ePrime.textContent = "Infinity (Exponent > 90)";
+                combinationBits.textContent = "11110";
+                exponentBits.textContent = "000000";
+                dpd.textContent = "00000000000000000000";
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                + "0000000000 0000000000"
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                    + "00000000000000000000")
+            } else if (parseInt(finalExponent.textContent) < -101) {
+                var exp1 = finalExponent.textContent + " (Special Case: Denormalized)";
+                finalExponent.textContent = exp1;
+                ePrime.textContent = "101 (01100101)";
+                combinationBits.textContent = "01000";
+                exponentBits.textContent = "100101";
+                dpd.textContent = "00000000000000000000";
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                + "0000000000 0000000000"
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                    + "00000000000000000000")
+            } else {
+                exponentBits.textContent = newDecimalString.length;
+                var eP = exponent + 101;
                 var ePString = eP.toString() + " (" +  decimalTo8BitBinary(eP) + ")" ;
                 ePrime.textContent = ePString;
-
-                let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(result4.shiftedValue));
+                let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(result));
                 combinationBits.textContent = bits.combinationFieldBits;
                 exponentBits.textContent = bits.exponentBits;
-
-                let dpdDigits = extractDigits(result4.shiftedValue);
+    
+                let dpdDigits = extractDigits(result);
                 let dpd1 = convertToBinaryAndDPD(dpdDigits.firstSet);
                 let dpd2 = convertToBinaryAndDPD(dpdDigits.secondSet);
                 dpd.textContent = dpd1.dpdNumber + dpd2.dpdNumber;
+           
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent
+                + " " + dpd1.dpdNumber + " " + dpd2.dpdNumber;
+    
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent
+                 + dpd1.dpdNumber + dpd2.dpdNumber)
+            }
+          
+        } else if(newDecimalString.length > 7 && !newDecimalString.includes('.')) {
+            selectElement.disabled = false;
+            let result2 = normalizeTo7WholeDigits(newDecimal)
+            var value1 = normalizeWithMode(result2.normalizedValue, selectedValue);
+            normalizedDecimal.textContent = value1; 
+            finalExponent.textContent = exponent - result2.decimalPlacesMoved;
+
+            if(parseInt(finalExponent.textContent) > 90) {
+                var exp1 = finalExponent.textContent + " (Special Case: Infinity)";
+                finalExponent.textContent = exp1;
+                ePrime.textContent = "Infinity (Exponent > 90)";
+                combinationBits.textContent = "11110";
+                exponentBits.textContent = "000000";
+                dpd.textContent = "00000000000000000000";
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                + "0000000000 0000000000"
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                    + "00000000000000000000")
+            } else if (parseInt(finalExponent.textContent) < -101) {
+                var exp1 = finalExponent.textContent + " (Special Case: Denormalized)";
+                finalExponent.textContent = exp1;
+                ePrime.textContent = "101 (01100101)";
+                combinationBits.textContent = "01000";
+                exponentBits.textContent = "100101";
+                dpd.textContent = "00000000000000000000";
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                + "0000000000 0000000000"
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                    + "00000000000000000000")
             } else {
-                normalizedDecimal.textContent = normalizeWithMode(result3.normalizedValue, 'truncate'); //HERE
-                finalExponent.textContent = exponent - result3.decimalPlacesMoved;
+            
+                var eP = exponent - result2.decimalPlacesMoved + 101;
+                var ePString = eP.toString() + " (" +  decimalTo8BitBinary(eP) + ")" ;
+                ePrime.textContent = ePString;
+    
+                let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(value1));
+                combinationBits.textContent = bits.combinationFieldBits;
+                exponentBits.textContent = bits.exponentBits;
+    
+                let dpdDigits = extractDigits(value1);
+                let dpd1 = convertToBinaryAndDPD(dpdDigits.firstSet);
+                let dpd2 = convertToBinaryAndDPD(dpdDigits.secondSet);
+                dpd.textContent = dpd1.dpdNumber + dpd2.dpdNumber;
+    
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent
+                + " " + dpd1.dpdNumber + " " + dpd2.dpdNumber;
+    
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent
+                 + dpd1.dpdNumber + dpd2.dpdNumber)
+            }
+           
+        } else if (newDecimalString.length > 8 && newDecimalString.includes('.')) {
+            selectElement.disabled = false;
+
+            if (newDecimalString.length.length == 9 && newDecimalString.length.includes('-')) {
+                selectElement.disabled = true;
+            }
+            let result3 = normalizeTo7WholeDigits(newDecimal);
+            var value2 = result3.normalizedValue;
+            var value3 = normalizeWithMode(value2, selectedValue);
+            normalizedDecimal.textContent = value3; 
+            finalExponent.textContent = exponent - result3.decimalPlacesMoved;
+
+            if(parseInt(finalExponent.textContent) > 90) {
+                var exp1 = finalExponent.textContent + " (Special Case: Infinity)";
+                finalExponent.textContent = exp1;
+                ePrime.textContent = "Infinity (Exponent > 90)";
+                combinationBits.textContent = "11110";
+                exponentBits.textContent = "000000";
+                dpd.textContent = "00000000000000000000";
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                + "0000000000 0000000000"
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                    + "00000000000000000000")
+            } else if (parseInt(finalExponent.textContent) < -101) {
+                var exp1 = finalExponent.textContent + " (Special Case: Denormalized)";
+                finalExponent.textContent = exp1;
+                ePrime.textContent = "101 (01100101)";
+                combinationBits.textContent = "01000";
+                exponentBits.textContent = "100101";
+                dpd.textContent = "00000000000000000000";
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                + "0000000000 0000000000"
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                    + "00000000000000000000")
+            } else {
                 var eP = exponent - result3.decimalPlacesMoved + 101;
                 var ePString = eP.toString() + " (" +  decimalTo8BitBinary(eP) + ")" ;
                 ePrime.textContent = ePString;
-                let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(normalizeWithMode(result3.normalizedValue, 'truncate')));
+    
+                let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(value3));
                 combinationBits.textContent = bits.combinationFieldBits;
                 exponentBits.textContent = bits.exponentBits;
-
-                let dpdDigits = extractDigits(normalizeWithMode(result3.normalizedValue, 'truncate'));
+    
+                let dpdDigits = extractDigits(value3);
                 let dpd1 = convertToBinaryAndDPD(dpdDigits.firstSet);
                 let dpd2 = convertToBinaryAndDPD(dpdDigits.secondSet);
                 dpd.textContent = dpd1.dpdNumber + dpd2.dpdNumber;
+    
+                finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent
+                + " " + dpd1.dpdNumber + " " + dpd2.dpdNumber;
+    
+                finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent
+                 + dpd1.dpdNumber + dpd2.dpdNumber)
+            }
+        } else {
+            selectElement.disabled = true;
+            let result3 = normalizeTo7WholeDigits(newDecimal);
+            if (hasTrailingZeros(normalizeWithMode(result3.normalizedValue, 'truncate'))) {
+                let result4 = shiftToLeft(normalizeWithMode(result3.normalizedValue, 'truncate'));
+                normalizedDecimal.textContent = result4.shiftedValue; 
+                finalExponent.textContent = exponent - result3.decimalPlacesMoved + result4.trailingZeros
+               
+                if(parseInt(finalExponent.textContent) > 90) {
+                    var exp1 = finalExponent.textContent + " (Special Case: Infinity)";
+                    finalExponent.textContent = exp1;
+                    ePrime.textContent = "Infinity (Exponent > 90)";
+                    combinationBits.textContent = "11110";
+                    exponentBits.textContent = "000000";
+                    dpd.textContent = "00000000000000000000";
+                    finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                    + "0000000000 0000000000"
+                    finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                        + "00000000000000000000")
+                } else if (parseInt(finalExponent.textContent) < -101) {
+                    var exp1 = finalExponent.textContent + " (Special Case: Denormalized)";
+                    finalExponent.textContent = exp1;
+                    ePrime.textContent = "101 (01100101)";
+                    combinationBits.textContent = "01000";
+                    exponentBits.textContent = "100101";
+                    dpd.textContent = "00000000000000000000";
+                    finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                    + "0000000000 0000000000"
+                    finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                        + "00000000000000000000")
+                } else {
+                    var eP = exponent - result3.decimalPlacesMoved + result4.trailingZeros + 101;
+                    var ePString = eP.toString() + " (" +  decimalTo8BitBinary(eP) + ")" ;
+                    ePrime.textContent = ePString;
+    
+                    let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(result4.shiftedValue));
+                    combinationBits.textContent = bits.combinationFieldBits;
+                    exponentBits.textContent = bits.exponentBits;
+    
+                    let dpdDigits = extractDigits(result4.shiftedValue);
+                    let dpd1 = convertToBinaryAndDPD(dpdDigits.firstSet);
+                    let dpd2 = convertToBinaryAndDPD(dpdDigits.secondSet);
+                    dpd.textContent = dpd1.dpdNumber + dpd2.dpdNumber;
+    
+                    finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent
+                    + " " + dpd1.dpdNumber + " " + dpd2.dpdNumber;
+        
+                    finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent
+                     + dpd1.dpdNumber + dpd2.dpdNumber)
+                }
+            } else {
+                normalizedDecimal.textContent = normalizeWithMode(result3.normalizedValue, 'truncate'); 
+                finalExponent.textContent = exponent - result3.decimalPlacesMoved;
+               
+
+                if(parseInt(finalExponent.textContent) > 90) {
+                    var exp1 = finalExponent.textContent + " (Special Case: Infinity)";
+                    finalExponent.textContent = exp1;
+                    ePrime.textContent = "Infinity (Exponent > 90)";
+                    combinationBits.textContent = "11110";
+                    exponentBits.textContent = "000000";
+                    dpd.textContent = "00000000000000000000";
+                    finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                    + "0000000000 0000000000"
+                    finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                        + "00000000000000000000")
+                } else if (parseInt(finalExponent.textContent) < -101) {
+                    var exp1 = finalExponent.textContent + " (Special Case: Denormalized)";
+                    finalExponent.textContent = exp1;
+                    ePrime.textContent = "101 (01100101)";
+                    combinationBits.textContent = "01000";
+                    exponentBits.textContent = "100101";
+                    dpd.textContent = "00000000000000000000";
+                    finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+                    + "0000000000 0000000000"
+                    finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                        + "00000000000000000000")
+                } else {
+                    var eP = exponent - result3.decimalPlacesMoved + 101;
+                    var ePString = eP.toString() + " (" +  decimalTo8BitBinary(eP) + ")" ;
+                    ePrime.textContent = ePString;
+                    let bits = extractBits(decimalTo8BitBinary(eP), getFirstDigitBinary(normalizeWithMode(result3.normalizedValue, 'truncate')));
+                    combinationBits.textContent = bits.combinationFieldBits;
+                    exponentBits.textContent = bits.exponentBits;
+    
+                    let dpdDigits = extractDigits(normalizeWithMode(result3.normalizedValue, 'truncate'));
+                    let dpd1 = convertToBinaryAndDPD(dpdDigits.firstSet);
+                    let dpd2 = convertToBinaryAndDPD(dpdDigits.secondSet);
+                    dpd.textContent = dpd1.dpdNumber + dpd2.dpdNumber;
+    
+                    finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent
+                    + " " + dpd1.dpdNumber + " " + dpd2.dpdNumber;
+        
+                    finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent
+                     + dpd1.dpdNumber + dpd2.dpdNumber)
+                }
             }
         }
+
+        if(normalizedDecimal.textContent.includes('NaN') || finalExponent.textContent.includes('NaN')) {
+            var exp1 = " (Special Case: NaN)";
+            normalizedDecimal.textContent = "NaN"
+            signBit.textContent = '0';
+            finalExponent.textContent = exp1;
+            ePrime.textContent = "NaN (Not-a-Number)";
+            combinationBits.textContent = "11111";
+            exponentBits.textContent = "000000";
+            dpd.textContent = "00000000000000000000";
+            finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+            + "0000000000 0000000000"
+            finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                + "00000000000000000000")
+        }
+
+        if(normalizedDecimal.textContent.includes('0000000')) {
+            var exp1 = "0";
+            finalExponent.textContent = exp1;
+            ePrime.textContent = "101 (01100101)";
+            combinationBits.textContent = "01000";
+            exponentBits.textContent = "100101";
+            dpd.textContent = "00000000000000000000";
+            finalAnswerBinary.textContent = signBit.textContent + " " + combinationBits.textContent + " " + exponentBits.textContent + " "
+            + "0000000000 0000000000"
+            finalAnswerHex.textContent = "0x" + binaryToHex(signBit.textContent + combinationBits.textContent + exponentBits.textContent 
+                + "00000000000000000000")
+        }
+
+        exportBool.disabled = false;
     }
 });
+
+document.getElementById('export-button').addEventListener('click', function() {
+    const decimalNumber = document.getElementById('decimal-number').value;
+    const exponent = document.getElementById('exponent').value;
+    const normalizedDecimal = document.getElementById('normalized-decimal');
+    const finalExponent = document.getElementById('final-exponent');
+    const ePrime = document.getElementById('e-prime');
+    const signBit = document.getElementById('sign-bit');
+    const combinationBits = document.getElementById('combination-bits');
+    const exponentBits = document.getElementById('exponent-bits');
+    const dpd = document.getElementById('dpd');
+    const finalAnswerBinary = document.getElementById('final-answer-binary');
+    const finalAnswerHex = document.getElementById('final-answer-hex');
+
+    const selectElement = document.getElementById('input-type');
+    var selectedValue = selectElement.value;
+    const isDisabled =  selectElement.disabled 
+
+    const roundingMappings = {
+        'truncate': 'Truncate',
+        'round-up': 'Round Up',
+        'round-down': 'Round Down',
+        'round-even': 'Round to Nearest Ties to Even'
+    };
+
+    if(isDisabled) {
+        const content = "IEEE-754 Decimal-32 Floating-Point Converter" + "\n" + "Inputs: " + "\n" + "Decimal Number: " + 
+        decimalNumber + "\n"  + "Exponent (Base-10): " + 
+        exponent + "\n"  + "Rounding Method: None " + "\n\n" + "Processing: " + "\n" + "Normalized Decimal: " + 
+        normalizedDecimal.textContent + "\n" + "Final Exponent: " +
+        finalExponent.textContent + "\n" + "E-Prime: " +
+        ePrime.textContent + "\n\n" + "Output: " + "\n" + "Sign Bit: " + 
+        signBit.textContent + "\n" + "Combination Bits: " +
+        combinationBits.textContent + "\n" + "Exponent Continuation Bits: " +
+        exponentBits.textContent + "\n" + "Mantissa Continuation Bits: " +
+        dpd.textContent + "\n" + "Final Output (Binary): " +
+        finalAnswerBinary.textContent + "\n" + "Final Output (Hexadecimal): " +
+        finalAnswerHex.textContent
+        
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'IEEE-754 Decimal-32 Output.txt';
+        document.body.appendChild(link); 
+        link.click(); 
+        document.body.removeChild(link); 
+    } else {
+        const content = "IEEE-754 Decimal-32 Floating-Point Converter" + "\n" + "INPUTS: " + "\n" + "Decimal Number: " + 
+        decimalNumber + "\n"  + "Exponent (Base-10): " + 
+        exponent + "\n"  + "Rounding Method: " + roundingMappings[selectedValue] + "\n\n" + "Processing: " + "\n" + "Normalized Decimal: " + 
+        normalizedDecimal.textContent + "\n" + "Final Exponent: " +
+        finalExponent.textContent + "\n" + "E-Prime: " +
+        ePrime.textContent + "\n\n" + "Output: " + "\n" + "Sign Bit: " + 
+        signBit.textContent + "\n" + "Combination Bits: " +
+        combinationBits.textContent + "\n" + "Exponent Continuation Bits: " +
+        exponentBits.textContent + "\n" + "Mantissa Continuation Bits: " +
+        dpd.textContent + "\n" + "Final Output (Binary): " +
+        finalAnswerBinary.textContent + "\n" + "Final Output (Hexadecimal): " +
+        finalAnswerHex.textContent
+
+        const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'IEEE-754 Decimal-32 Output.txt';
+        document.body.appendChild(link); 
+        link.click(); 
+        document.body.removeChild(link); 
+    }
+    
+});
+
+function calculate(expression) {
+   
+    expression = expression.toString().trim();
+
+    if (expression.startsWith('sqrt(') && expression.endsWith(')')) {
+        const value = parseFloat(expression.slice(5, -1));
+        if (isNaN(value) || value < 0) {
+            return NaN; 
+        }
+        return Math.sqrt(value);
+    }
+
+    if (expression.includes('/')) {
+        const parts = expression.split('/');
+        if (parts.length === 2) {
+            const numerator = parseFloat(parts[0].trim());
+            const denominator = parseFloat(parts[1].trim());
+
+            if (denominator === 0) {
+                return NaN; 
+            }
+            return numerator / denominator;
+        }
+        return NaN; 
+    }
+
+    try {
+
+        const result = new Function('return ' + expression)();
+        
+        if (isNaN(result) || !isFinite(result)) {
+            return NaN; 
+        }
+        
+        return result;
+    } catch {
+        return NaN; 
+    }
+}
+
+function binaryToHex(binaryString) {
+    let hexString = '';
+    for (let i = 0; i < binaryString.length; i += 4) {
+
+        let fourBits = binaryString.slice(i, i + 4);
+        
+        let hexDigit = parseInt(fourBits, 2).toString(16).toUpperCase();
+        
+        hexString += hexDigit;
+    }
+
+    return hexString;
+}
 
 function extractDigits(normalizedDecimal) {
 
@@ -189,19 +506,11 @@ function getFirstDigitBinary(decimalString) {
 }
 
 function decimalTo4BitBinary(decimalNumber) {
-
     var number = parseInt(decimalNumber);
-
-    if (number < 0 || number > 9) {
-        throw new Error("Number must be between 0 and 9");
-    }
     return number.toString(2).padStart(4, '0');
 }
 
 function decimalTo8BitBinary(decimalNumber) {
-    if (decimalNumber < 0 || decimalNumber > 255) {
-        throw new Error("Number must be between 0 and 255");
-    }
     return decimalNumber.toString(2).padStart(8, '0');
 }
 
@@ -212,7 +521,7 @@ function normalizeTo7WholeDigits(value) {
             decimalPlacesMoved: 0
         };
     }
-    
+
     let absoluteValue = Math.abs(value);
     let wholeDigits = Math.floor(Math.log10(absoluteValue)) + 1;
 
@@ -249,7 +558,7 @@ function normalizeTo7WholeDigits(value) {
             if(isNegative) {
                 base += 1;
                 strValue = base.toString().padStart(7, '0').slice(0, 7);
-                console.log(strValue)
+             
             } else {
                 strValue = strValue.slice(0, 7);
             }
