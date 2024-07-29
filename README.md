@@ -105,3 +105,10 @@ Input any decimal number and the exponent. If the decimal number input contains 
       <br>
       ![negativeexp](https://github.com/user-attachments/assets/4c66430c-0ae9-4adf-aace-56fffcc360b6)
       ***
+
+14. **Input with greater than -101 exponent** <br>
+         Input: 3457<br>
+         Exponent: -200<br>
+      <br>
+      ![denormalized](https://github.com/user-attachments/assets/b0ea329a-d0a5-48bf-b73d-91a0e0042db8)
+      ***
