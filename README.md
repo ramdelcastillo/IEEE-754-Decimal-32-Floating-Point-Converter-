@@ -120,7 +120,7 @@ Exporting Results:
       ![negativeexp](https://github.com/user-attachments/assets/4c66430c-0ae9-4adf-aace-56fffcc360b6)
       ***
 
-14. **Input with greater than -101 exponent** <br>
+14. **Input with less than -101 exponent** <br>
          Input: 3457<br>
          Exponent: -200<br>
       <br>
