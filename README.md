@@ -247,20 +247,6 @@ Exporting Results:
    
 ![image](https://github.com/user-attachments/assets/176b63ae-55c9-43a3-8d5a-70e956712830)
  *** 
-   34. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
-      Input: -345324234 (Round Down)<br>
-      Exponent: -9<br>
-   <br>
-   
-![image](https://github.com/user-attachments/assets/aa26e7a3-dc01-476a-b9c1-b9a6550b7a94)
- *** 
-   35. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
-      Input: -345324234 (Round Down)<br>
-      Exponent: -9<br>
-   <br>
-   
-![image](https://github.com/user-attachments/assets/aa26e7a3-dc01-476a-b9c1-b9a6550b7a94)
- *** 
 
  
 
