@@ -1,7 +1,7 @@
 <!-- ABOUT THE PROJECT -->
 ## CSARCH2-Simulation-Project---IEEE-754-Decimal-32-Floating-Point-Converter
 
-The **IEEE-754-Decimal-32-Floating-Point-Converter** is a website designed to convert any decimal to a Decimal 32 floating point. This will also show different processes before coming up with a final answer. Below are some sample inputs from the website.
+The **IEEE-754-Decimal-32-Floating-Point-Converter** is a website designed to convert any decimal input with exponent (Base-10) to an IEEE 754 Single Precision decimal (Decimal-32) format. This will also show processing done while converting the input to its respective output. Below is a manual on how to use the application with some sample inputs from the webpage.
 
 ## Developers
 * Arca, Althea Denisse<br>
@@ -11,22 +11,22 @@ The **IEEE-754-Decimal-32-Floating-Point-Converter** is a website designed to co
 
 <!-- GETTING STARTED -->
 ## How to Use
-1. Input any decimal number and the exponent.
+1. Input any decimal number (can accept basic expressions such as 1/0, sqrt(4), x+10) and the exponent which must be a number only.
 2. Click Convert.
 
 ![how to use](https://github.com/user-attachments/assets/7cef6c05-6f2a-490b-bf40-a674edffd344)
    
-If the decimal number input contains more than 7 digits, the user may have the option to truncate, round up, round down, and round to the nearest ties to even. To do this, do the following:
+If the decimal number input contains more than 7 digits, the user will have the option to truncate, round up, round down, and round to the nearest ties to even. To do this, do the following:
 1. After clicking the convert button, click on the dropdown menu beside the input and choose any options.
 2. Click the Convert button again to get the result.
 
 ![roundingoptions](https://github.com/user-attachments/assets/62b328a4-c430-4b40-865a-8aafda7a58de)
 
 Exporting Results:
-1. Click the Export button below the results.
-2. The result (in a txt format) will automatically download.
+1. Click the Export button below the results after converting.
+2. The result of the conversion (in a text file named 'IEEE-754 Decimal-32 Output') will automatically download.
 
-   
+
 ### Input
 
 1. **Input a 3 digit number** <br>
