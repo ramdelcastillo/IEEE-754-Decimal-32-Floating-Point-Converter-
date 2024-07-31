@@ -162,56 +162,42 @@ Exporting Results:
    
 ![image](https://github.com/user-attachments/assets/9200d6a3-3731-44e3-8844-d152d70b88c8)
  *** 
-   22. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
-      Input: -345324234 (Round Down)<br>
-      Exponent: -9<br>
-   <br>
-   
-![image](https://github.com/user-attachments/assets/9200d6a3-3731-44e3-8844-d152d70b88c8)
- *** 
-   23. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
-      Input: -345324234 (Round Down)<br>
-      Exponent: -9<br>
-   <br>
-   
-![image](https://github.com/user-attachments/assets/aa26e7a3-dc01-476a-b9c1-b9a6550b7a94)
- *** 
-   24. **Input equates to final exponent greater than 90 (Special Case: Infinity)** <br>
+   22. **Input equates to final exponent greater than 90 (Special Case: Infinity)** <br>
       Input: 893495409 (Round Up)<br>
       Exponent: 89<br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/322c5e79-e7b7-479c-9a88-fa88fa6a0130)
  *** 
-   25. **Input equates to final exponent less than 101 (Special Case: Denormalized)** <br>
+   23. **Input equates to final exponent less than 101 (Special Case: Denormalized)** <br>
       Input: -6423.34523 (RTNTTE)<br>
       Exponent: -99<br>
    <br>
 
 ![image](https://github.com/user-attachments/assets/4d8093e2-e6fb-4323-a361-dab5756be910)
  *** 
-   26. **Input equates to normalized decimal being NaN (Special Case: NaN)** <br>
+   24. **Input equates to normalized decimal being NaN (Special Case: NaN)** <br>
       Input: sqrt(-1) <br>
       Exponent: -5<br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/5ded3aee-125f-45c3-abda-f37ab385f913)
  *** 
-   27. **Input equates to normalized decimal being NaN (Special Case: NaN)** <br>
+   25. **Input equates to normalized decimal being NaN (Special Case: NaN)** <br>
       Input: 5/0 <br>
       Exponent: 45<br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/8ac8c519-9762-42d6-8417-e1e76f52df7e)
  ***
-   28. **Input equates to normalized decimal being NaN (Special Case: NaN)** <br>
+   26. **Input equates to normalized decimal being NaN (Special Case: NaN)** <br>
       Input: 213<br>
       Exponent: a<br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/404cfc67-cf6b-443b-b65a-02337e107c08)
  *** 
-   29. **Expression Inputs 1** <br>
+   27. **Expression Inputs 1** <br>
       Input: 5/2<br>
       Exponent: 5<br>
    <br>
@@ -219,49 +205,49 @@ Exporting Results:
 ![image](https://github.com/user-attachments/assets/55673b08-54c0-439b-a180-6e3d0e3d7bab)
  *** 
 
-   30. **Expression Inputs 2** <br>
+   28. **Expression Inputs 2** <br>
       Input: sqrt(255) (Round Down)<br>
       Exponent: 45<br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/ecb36c08-446b-44e9-a666-5db85c7efdc4)
  *** 
-   31. **Expression Inputs 3** <br>
+   29. **Expression Inputs 3** <br>
       Input: (2*54)+1 <br>
       Exponent: 23<br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/4bfd7a74-c55f-42dc-838c-bcdcab40a3da)
  *** 
-   32. **Blank decimal input** <br>
+   30. **Blank decimal input** <br>
       Input: <br>
       Exponent: 23<br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/437465a1-0fc7-4cd4-b4a5-b2cabd650832)
  *** 
-   33. **Blank exponent** <br>
+   31. **Blank exponent** <br>
       Input: 123<br>
       Exponent: <br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/386f3445-ff7a-4653-b5dc-f3d57aabced7)
  *** 
-   34. **Blank decimal and exponent input** <br>
+   32. **Blank decimal and exponent input** <br>
       Input: <br>
       Exponent: <br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/176b63ae-55c9-43a3-8d5a-70e956712830)
  *** 
-   14. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
+   33. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
       Input: -345324234 (Round Down)<br>
       Exponent: -9<br>
    <br>
    
 ![image](https://github.com/user-attachments/assets/aa26e7a3-dc01-476a-b9c1-b9a6550b7a94)
  *** 
-   14. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
+   34. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
       Input: -345324234 (Round Down)<br>
       Exponent: -9<br>
    <br>
