@@ -89,7 +89,7 @@ Exporting Results:
       Input: 4674320131 (Round Up)<br>
       Exponent: 9<br>
    <br>
-    ![image](https://github.com/user-attachments/assets/1d2e4b78-7d30-4f81-9a34-93c76d847d04)
+    ![image2](https://github.com/user-attachments/assets/1d2e4b78-7d30-4f81-9a34-93c76d847d04)
     ***
  
 
