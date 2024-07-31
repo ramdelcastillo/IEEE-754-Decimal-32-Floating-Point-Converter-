@@ -248,6 +248,11 @@ Exporting Results:
 ![image](https://github.com/user-attachments/assets/176b63ae-55c9-43a3-8d5a-70e956712830)
  *** 
 
+Example of Exported Text File:
+<br>
+![image](https://github.com/user-attachments/assets/d9f3333d-ef9c-408a-bb40-31f8eda34cd5)
+
+
  
 
 
