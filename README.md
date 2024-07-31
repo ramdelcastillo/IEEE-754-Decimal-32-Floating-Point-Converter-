@@ -50,10 +50,10 @@ Exporting Results:
    ![9digittruncate](https://github.com/user-attachments/assets/9a5577fa-04fb-4813-9289-5004e8ee1a9e)
    ***
 4. **Input with a decimal point that has more than 7 digits with Truncate option (test)** <br>
-      Input: 967587036 (Truncate)<br>
-      Exponent: 5<br>
+      Input: 8934.95409 (Truncate)<br>
+      Exponent: 20<br>
    <br>
-   ![9digittruncate](https://github.com/user-attachments/assets/9a5577fa-04fb-4813-9289-5004e8ee1a9e)
+   ![image](https://github.com/user-attachments/assets/f74937a4-c577-4d71-9f4e-a9673e2059a2)
    ***   
 
 5. **Input a negative number with Round Down option** <br>
