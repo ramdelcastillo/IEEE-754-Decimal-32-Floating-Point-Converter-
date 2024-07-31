@@ -35,63 +35,114 @@ Exporting Results:
    <br>
    ![3digitdecimal](https://github.com/user-attachments/assets/9ac5b182-c851-44a9-adc8-c231c167cc4f)
    ***
-   
-2. **Input with a decimal point with less than 7 digits** <br>
+2. **Input with negative 5-digit number** <br>
+      Input: -12345<br>
+      Exponent: -5<br>
+   <br>
+  ![image](https://github.com/user-attachments/assets/f555bed5-d221-4045-a982-7de12a77e4b3)
+   ***
+3. **Input with a decimal point with less than 7 digits** <br>
       Input: 468.23<br>
+      Exponent: -20<br>
+   <br>
+   ![image](https://github.com/user-attachments/assets/2f4c70bf-064a-4829-ae2b-022fead227dd)
+   ***
+4. **Input with a decimal point with less than 7 digits (negative)** <br>
+      Input: -3012.43<br>
       Exponent: 4<br>
    <br>
-   ![withdecimalpoint](https://github.com/user-attachments/assets/b68d929b-0bc1-4a34-a184-c88fc54d6367)
+  ![image](https://github.com/user-attachments/assets/2d567977-50e7-495a-9d1e-dfae8dca9690)
    ***
-   
-3. **Input with more than 7 digits to test the Truncate option** <br>
+5. **Input with more than 7 digits with Truncate option** <br>
       Input: 967587036 (Truncate)<br>
       Exponent: 5<br>
    <br>
-   ![9digittruncate](https://github.com/user-attachments/assets/9a5577fa-04fb-4813-9289-5004e8ee1a9e)
+   ![image](https://github.com/user-attachments/assets/4fc32014-1b83-43f5-914c-d12c2151e728)
    ***
-4. **Input with a decimal point that has more than 7 digits with Truncate option (test)** <br>
-      Input: 8934.95409 (Truncate)<br>
-      Exponent: 20<br>
+6. **Input with more than 7 digits with Truncate option (negative)** <br>
+      Input: -823483243 (Truncate)<br>
+      Exponent: 2<br>
    <br>
-   ![image](https://github.com/user-attachments/assets/f74937a4-c577-4d71-9f4e-a9673e2059a2)
-   ***   
+   ![image](https://github.com/user-attachments/assets/50cd91b9-7496-4072-8c95-b640190838fc)
+   ***
+8. **Input with a decimal point that has more than 7 digits with Truncate option** <br>
+      Input: 8934.95409 (Truncate)<br>
+      Exponent: -30<br>
+   <br>
+  ![image](https://github.com/user-attachments/assets/fabaea04-f2a4-4b1c-8c27-264972fdc590)
+   ***
+9. **Input with a decimal point that has more than 7 digits with Truncate option (negative)** <br>
+      Input: -434.15321 (Truncate)<br>
+      Exponent: -12<br>
+   <br>
+![image](https://github.com/user-attachments/assets/3ebfd994-d958-4a4c-9860-038cb137b4ee)
+***
+10. **Input with more than 7 digits with Round Up option** <br>
+      Input: 4674320131 (Round Up)<br>
+      Exponent: 9<br>
+   <br>
+ ![image](https://github.com/user-attachments/assets/5afef646-e5ea-4ae5-90aa-26b9c3dd87e4)
+***
+11. **Input with more than 7 digits with Round Up option (negative)** <br>
+      Input: -24233227 (Round Up)<br>
+      Exponent: -1<br>
+   <br>
+![image](https://github.com/user-attachments/assets/1d2e4b78-7d30-4f81-9a34-93c76d847d04)
+***
+12. **Input with a decimal point that has more than 7 digits with Round Up option** <br>
+      Input: 78.345345 (Round Up)<br>
+      Exponent: -24<br>
+   <br>
+  ![image](https://github.com/user-attachments/assets/4fcf8f4b-214d-4f4b-9521-29a39b6c600c)
+***
+13. **Input with a decimal point that has more than 7 digits with Round Up option (negative)** <br>
+      Input: -434523.45 (Round Up)<br>
+      Exponent: 5<br>
+   <br>
+![image](https://github.com/user-attachments/assets/ea4d3b3f-26fa-4a19-8ad0-0ae8373d22b1)
+14. **Input with more than 7 digits with Round Down option** <br>
+      Input: 5673522231 (Round Up)<br>
+      Exponent: 9<br>
+   <br>
+ ![image](https://github.com/user-attachments/assets/5afef646-e5ea-4ae5-90aa-26b9c3dd87e4)
 
-5. **Input a negative number with Round Down option** <br>
-      Input: -102478597 (Round Down)<br>
+
+11. **Positive input with Round Down option** <br>
+      Input: 102478597 (Round Down)<br>
       Exponent: 4<br>
    <br>
    ![negativenumandrounddown](https://github.com/user-attachments/assets/31ce94ef-00ed-4271-b366-27f7ca608988)
    ***
    
-6. **Input a square root number with Round to Nearest Ties to Even option** <br>
+11. **Input a square root number with Round to Nearest Ties to Even option** <br>
       Input: sqrt(255) (Round to Nearest Ties to Even)<br>
       Exponent: 6<br>
    <br>
    ![sqrtwithroundtoNTE](https://github.com/user-attachments/assets/821be649-a6e0-4357-988c-79f8f4928497)
    ***
    
-7. **Input a fraction with the Round Up option** <br>
+11. **Input a fraction with the Round Up option** <br>
       Input: 5/45 (Round Up)<br>
       Exponent: 3<br>
    <br>
    ![fractionwithroundup](https://github.com/user-attachments/assets/8d17abd3-8220-4216-827a-e0990a8d0a37)
    ***
    
-8. **Input with addition** <br> 
+11. **Input with addition** <br> 
       Input: 749 + 5<br>
       Exponent: 6<br>
    <br>
    ![addition](https://github.com/user-attachments/assets/68486705-790e-4c67-b051-0400085f7385)
    ***
    
-9. **Input with addition and letter to test NaN values** <br>
+11. **Input with addition and letter to test NaN values** <br>
        Input: 45 + r<br>
        Exponent: 8<br>
    <br>
    ![specialcaseNaNwithletter](https://github.com/user-attachments/assets/77c572fa-b057-4665-a98a-385b72b3680c)
    ***
    
-10. **Input letters to test NaN values** <br>
+11. **Input letters to test NaN values** <br>
       Input: ab<br>
       Exponent: 6<br>
    <br>
