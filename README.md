@@ -65,25 +65,25 @@ Exporting Results:
    <br>
    ![image](https://github.com/user-attachments/assets/50cd91b9-7496-4072-8c95-b640190838fc)
    ***
-8. **Input with a decimal point that has more than 7 digits with Truncate option** <br>
+7. **Input with a decimal point that has more than 7 digits with Truncate option** <br>
       Input: 8934.95409 (Truncate)<br>
       Exponent: -30<br>
    <br>
   ![image](https://github.com/user-attachments/assets/fabaea04-f2a4-4b1c-8c27-264972fdc590)
    ***
-9. **Input with a decimal point that has more than 7 digits with Truncate option (negative)** <br>
+8. **Input with a decimal point that has more than 7 digits with Truncate option (negative)** <br>
       Input: -434.15321 (Truncate)<br>
       Exponent: -12<br>
    <br>
 ![image](https://github.com/user-attachments/assets/3ebfd994-d958-4a4c-9860-038cb137b4ee)
 ***
-10. **Input with more than 7 digits with Round Up option** <br>
+9. **Input with more than 7 digits with Round Up option** <br>
       Input: 4674320131 (Round Up)<br>
       Exponent: 9<br>
    <br>
  ![image](https://github.com/user-attachments/assets/5afef646-e5ea-4ae5-90aa-26b9c3dd87e4)
 
-11. **Input with more than 7 digits with Round Up option (negative)** <br>
+10. **Input with more than 7 digits with Round Up option (negative)** <br>
       Input: -24233227 (Round Up)<br>
       Exponent: -1<br>
    <br>
