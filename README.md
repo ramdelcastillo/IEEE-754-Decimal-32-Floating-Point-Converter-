@@ -167,7 +167,7 @@ Exporting Results:
       Exponent: -9<br>
    <br>
    
-![image](https://github.com/user-attachments/assets/aa26e7a3-dc01-476a-b9c1-b9a6550b7a94)
+![image](https://github.com/user-attachments/assets/9200d6a3-3731-44e3-8844-d152d70b88c8)
  *** 
    23. **Input with more than 7 digits with Round Down option (negative decimal)** <br>
       Input: -345324234 (Round Down)<br>
