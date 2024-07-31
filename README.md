@@ -83,6 +83,12 @@ Exporting Results:
    <br>
  ![image](https://github.com/user-attachments/assets/5afef646-e5ea-4ae5-90aa-26b9c3dd87e4)
  ***
+10. **Input with more than 7 digits with Round Up option** <br>
+      Input: 4674320131 (Round Up)<br>
+      Exponent: 9<br>
+   <br>
+ ![image](https://github.com/user-attachments/assets/5afef646-e5ea-4ae5-90aa-26b9c3dd87e4)
+ ***
 
 10. **Input with more than 7 digits with Round Up option (negative)** <br>
       Input: 4674320131 (Round Up)<br>
