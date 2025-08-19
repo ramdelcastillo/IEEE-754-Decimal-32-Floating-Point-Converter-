@@ -1,7 +1,8 @@
 ![image](https://github.com/user-attachments/assets/2637d62f-11d3-46ba-8649-1e6a8a0dfb47)<!-- ABOUT THE PROJECT -->
 ## CSARCH2-Simulation-Project---IEEE-754-Decimal-32-Floating-Point-Converter
-
+<p align="justify">
 The **IEEE-754-Decimal-32-Floating-Point-Converter** is a website designed to convert any decimal input with exponent (Base-10) to an IEEE 754 Single Precision decimal (Decimal-32) format. This will also show processing done while converting the input to its respective output. Below is a manual on how to use the application with some sample inputs from the webpage.
+</p>
 
 ## Developers (S14 - Group 7)
 * Arca, Althea Denisse<br>
